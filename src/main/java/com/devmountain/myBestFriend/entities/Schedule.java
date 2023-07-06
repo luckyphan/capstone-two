@@ -1,0 +1,52 @@
+package com.devmountain.myBestFriend.entities;
+
+import com.devmountain.myBestFriend.dtos.ScheduleDto;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import java.time.LocalTime;
+import java.util.Date;
+
+@Entity
+@Table(name = "Schedules")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+public class Schedule {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column
+    private String event;
+
+    @Temporal(TemporalType.DATE)
+    Date eventDate;
+
+    @Column
+    @DateTimeFormat(pattern = "HH:mm:ss")
+    LocalTime eventTime;
+
+    @ManyToOne
+    @JsonBackReference
+    private Pet pet;
+
+    public Schedule(ScheduleDto scheduleDto){
+        if(scheduleDto.getEvent() != null){
+            this.event = scheduleDto.getEvent();
+        }
+        if(scheduleDto.getEventDate() != null){
+            this.eventDate = scheduleDto.getEventDate();
+        }
+        if(scheduleDto.getEventTime() != null){
+            this.eventTime = scheduleDto.getEventTime();
+        }
+    }
+
+
+}
