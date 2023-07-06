@@ -6,7 +6,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
-import java.time.LocalTime;
 import java.util.Date;
 
 @Data
@@ -16,7 +15,7 @@ public class ScheduleDto implements Serializable {
     private Long id;
     private String event;
     Date eventDate;
-    LocalTime eventTime;
+    Date eventTime;
 
     public ScheduleDto(Schedule schedule){
         if(schedule.getId() != null){

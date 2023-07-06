@@ -9,7 +9,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import java.time.LocalTime;
 import java.util.Date;
 
 @Entity
@@ -28,9 +27,8 @@ public class Schedule {
     @Temporal(TemporalType.DATE)
     Date eventDate;
 
-    @Column
-    @DateTimeFormat(pattern = "HH:mm:ss")
-    LocalTime eventTime;
+    @Temporal(TemporalType.TIME)
+    Date eventTime;
 
     @ManyToOne
     @JsonBackReference
